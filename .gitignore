@@ -1,0 +1,9 @@
+#Ignore everything
+*
+
+#Except
+!.gitignore
+!LICENSE
+!*.md
+!*.txt
+!*.cs
