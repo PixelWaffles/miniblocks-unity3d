@@ -11,6 +11,7 @@ namespace ginsederp.miniblocks
     {
       blockIdMap.Add( 1, new Int3( 3, 4, 5 ), new Int3( 10, 20, 30 ) );
       blockIdMap.Add( 2, new Int3( 2, 3, 4 ), new Int3( 15, 22, 34 ) );
+      blockIdMap.Remove( new Int3( 0, 0, 0 ), new Int3( 10, 10, 10 ) );
       return;
     }
   }

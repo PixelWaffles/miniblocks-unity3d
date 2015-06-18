@@ -30,14 +30,14 @@ namespace ginsederp.miniblocks
       return cell == null || cell.Equals( default(T) ) || typeof(T) == typeof(string) && string.IsNullOrEmpty( cell as string );
     }
 
-    public void Add( T _value, Int3 _begin, Int3 _size )
+    public void Add( T _value, Int3 _begin, Int3 _size, bool _writeOverFilledCells = false )
     {
       AllocateGrid( _begin, _size );
 
       for( int xi = _begin.x; xi < _begin.x + _size.x; xi++ ) {
         for( int yi = _begin.y; yi < _begin.y + _size.y; yi++ ) {
           for( int zi = _begin.z; zi < _begin.z + _size.z; zi++ ) {
-            if( CellIsEmpty( xi, yi, zi ) ) {
+            if( _writeOverFilledCells || CellIsEmpty( xi, yi, zi ) ) {
               grid[ xi, yi, zi ] = _value;
             }
           }
@@ -56,6 +56,13 @@ namespace ginsederp.miniblocks
       Debug.Log( "y alloc: " + grid.GetLength(1) );
       Debug.Log( "z alloc: " + grid.GetLength(2) );
 
+      return;
+    }
+
+    public void Remove( Int3 _begin, Int3 _size )
+    {
+      Add( default(T), _begin, _size, true );
+      return;
     }
 
     public void AllocateGrid( Int3 _begin, Int3 _size )
