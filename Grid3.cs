@@ -44,6 +44,7 @@ namespace ginsederp.miniblocks
         }
       }
 
+      /*
       for( int xi = 0; xi < grid.GetLength(0); xi++ ) {
         for( int yi = 0; yi < grid.GetLength(1); yi++ ) {
           for( int zi = 0; zi < grid.GetLength(2); zi++ ) {
@@ -55,6 +56,7 @@ namespace ginsederp.miniblocks
       Debug.Log( "x alloc: " + grid.GetLength(0) );
       Debug.Log( "y alloc: " + grid.GetLength(1) );
       Debug.Log( "z alloc: " + grid.GetLength(2) );
+      */
 
       return;
     }
