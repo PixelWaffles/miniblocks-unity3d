@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 
 namespace ginsederp.miniblocks
@@ -6,9 +7,21 @@ namespace ginsederp.miniblocks
   public class Miniblocks : MonoBehaviour
   {
     public Grid3<int> blockIdMap = new Grid3<int>();
+    [NonSerialized] public MeshRenderer meshRenderer;
+
+    protected void InitComponents()
+    {
+      meshRenderer = gameObject.GetComponent<MeshRenderer>();
+
+      meshRenderer = ( meshRenderer != null ) ? meshRenderer : gameObject.AddComponent<MeshRenderer>();
+
+      return;
+    }
 
     void Start()
     {
+      InitComponents();
+
       blockIdMap.Add( 1, new Int3( 3, 4, 5 ), new Int3( 10, 20, 30 ) );
       blockIdMap.Add( 2, new Int3( 2, 3, 4 ), new Int3( 15, 22, 34 ) );
       blockIdMap.Remove( new Int3( 0, 0, 0 ), new Int3( 10, 10, 10 ) );
