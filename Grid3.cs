@@ -9,6 +9,27 @@ namespace ginsederp.miniblocks
   {
     public T[,,] grid = new T[ 1, 1, 1 ];
 
+    public bool CellIsFilled( Int3 _cellPosition )
+    {
+      return !CellIsEmpty( _cellPosition.x, _cellPosition.y, _cellPosition.z );
+    }
+
+    public bool CellIsFilled( int _cellPosX, int _cellPosY, int _cellPosZ )
+    {
+      return !CellIsEmpty( _cellPosX, _cellPosY, _cellPosZ );
+    }
+
+    public bool CellIsEmpty( Int3 _cellPosition )
+    {
+      return CellIsEmpty( _cellPosition.x, _cellPosition.y, _cellPosition.z );
+    }
+
+    public bool CellIsEmpty( int _cellPosX, int _cellPosY, int _cellPosZ )
+    {
+      T cell = grid[ _cellPosX, _cellPosY, _cellPosZ ];
+      return cell == null || cell.Equals( default(T) ) || typeof(T) == typeof(string) && string.IsNullOrEmpty( cell as string );
+    }
+
     public void Add( T _value, Int3 _begin, Int3 _size )
     {
       AllocateGrid( _begin, _size );
@@ -16,7 +37,9 @@ namespace ginsederp.miniblocks
       for( int xi = _begin.x; xi < _begin.x + _size.x; xi++ ) {
         for( int yi = _begin.y; yi < _begin.y + _size.y; yi++ ) {
           for( int zi = _begin.z; zi < _begin.z + _size.z; zi++ ) {
-            grid[ xi, yi, zi ] = _value;
+            if( CellIsEmpty( xi, yi, zi ) ) {
+              grid[ xi, yi, zi ] = _value;
+            }
           }
         }
       }
