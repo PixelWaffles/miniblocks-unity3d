@@ -9,7 +9,7 @@ namespace ginsederp.miniblocks
 
     void Start()
     {
-      blockIdMap.Add( new Int3( 0, 0, 0 ), new Int3( 9, 19, 29 ) );
+      blockIdMap.Add( 0, new Int3( 0, 0, 0 ), new Int3( 9, 19, 29 ) );
       return;
     }
   }
