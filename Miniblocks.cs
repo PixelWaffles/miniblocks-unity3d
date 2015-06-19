@@ -8,12 +8,15 @@ namespace ginsederp.miniblocks
   {
     public Grid3<int> blockIdMap = new Grid3<int>();
     [NonSerialized] public MeshRenderer meshRenderer;
+    [NonSerialized] public MeshFilter meshFilter;
 
     protected void InitComponents()
     {
       meshRenderer = gameObject.GetComponent<MeshRenderer>();
+      meshFilter = gameObject.GetComponent<MeshFilter>();
 
       meshRenderer = ( meshRenderer != null ) ? meshRenderer : gameObject.AddComponent<MeshRenderer>();
+      meshFilter = ( meshFilter != null ) ? meshFilter : gameObject.AddComponent<MeshFilter>();
 
       return;
     }
