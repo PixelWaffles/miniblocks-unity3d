@@ -36,10 +36,13 @@ namespace ginsederp.miniblocks
               continue;
             }
 
-            // Build Back Faces
+            // Generate Back Faces
             tris.AddRange( BuildFaceTris( verts.Count, false ) );
             verts.AddRange( BuildFaceVerts( new Vector3( xi, yi, zi ), Vector3.up, Vector3.right ) );
 
+            // Generate Front Faces
+            tris.AddRange( BuildFaceTris( verts.Count, true ) );
+            verts.AddRange( BuildFaceVerts( new Vector3( xi, yi, zi ), Vector3.up, Vector3.right ) );
           }
         }
       }
@@ -90,6 +93,10 @@ namespace ginsederp.miniblocks
       tris[3] = _vertStartIndex + 3;
       tris[4] = _vertStartIndex + 0;
       tris[5] = _vertStartIndex + 2;
+
+      if( _isReversed ) {
+        Array.Reverse( tris );
+      }
 
       return tris;
     }
