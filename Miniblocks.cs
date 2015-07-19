@@ -84,18 +84,26 @@ namespace ginsederp.miniblocks
       // |/ |
       // ^--<
 
-      // First Triangle
-      tris[0] = _vertStartIndex + 1;
-      tris[1] = _vertStartIndex + 2;
-      tris[2] = _vertStartIndex + 0;
-
-      //Second Triangle
-      tris[3] = _vertStartIndex + 3;
-      tris[4] = _vertStartIndex + 0;
-      tris[5] = _vertStartIndex + 2;
-
       if( _isReversed ) {
-        Array.Reverse( tris );
+        // First Triangle
+        tris[ 0 ] = _vertStartIndex + 0;
+        tris[ 1 ] = _vertStartIndex + 3;
+        tris[ 2 ] = _vertStartIndex + 1;
+
+        //Second Triangle
+        tris[ 3 ] = _vertStartIndex + 2;
+        tris[ 4 ] = _vertStartIndex + 1;
+        tris[ 5 ] = _vertStartIndex + 3;
+      } else {
+        // First Triangle
+        tris[ 0 ] = _vertStartIndex + 1;
+        tris[ 1 ] = _vertStartIndex + 2;
+        tris[ 2 ] = _vertStartIndex + 0;
+
+        //Second Triangle
+        tris[ 3 ] = _vertStartIndex + 3;
+        tris[ 4 ] = _vertStartIndex + 0;
+        tris[ 5 ] = _vertStartIndex + 2;
       }
 
       return tris;
