@@ -42,7 +42,7 @@ namespace ginsederp.miniblocks
 
             // Generate Front Faces
             tris.AddRange( BuildFaceTris( verts.Count, true ) );
-            verts.AddRange( BuildFaceVerts( new Vector3( xi, yi, zi ), Vector3.up, Vector3.right ) );
+            verts.AddRange( BuildFaceVerts( new Vector3( xi, yi, zi + 1 ), Vector3.up, Vector3.right ) );
           }
         }
       }
