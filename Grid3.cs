@@ -26,8 +26,16 @@ namespace ginsederp.miniblocks
 
     public bool CellIsEmpty( int _cellPosX, int _cellPosY, int _cellPosZ )
     {
+      if( CellIsOutOfRange( _cellPosX, _cellPosY, _cellPosZ ) ) {
+        return true;
+      }
       T cell = grid[ _cellPosX, _cellPosY, _cellPosZ ];
       return cell == null || cell.Equals( default(T) ) || typeof(T) == typeof(string) && string.IsNullOrEmpty( cell as string );
+    }
+
+    public bool CellIsOutOfRange( int _cellPosX, int _cellPosY, int _cellPosZ )
+    {
+      return _cellPosX < 0 || _cellPosY < 0 || _cellPosZ < 0 || _cellPosX >= grid.GetLength( 0 ) || _cellPosY >= grid.GetLength( 1 ) || _cellPosZ >= grid.GetLength( 2 );
     }
 
     public void Add( T _value, Int3 _begin, Int3 _size, bool _writeOverFilledCells = false )

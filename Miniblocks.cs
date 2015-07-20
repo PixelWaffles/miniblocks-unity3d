@@ -37,28 +37,40 @@ namespace ginsederp.miniblocks
             }
 
             // Generate Back Faces
-            tris.AddRange( BuildFaceTris( verts.Count, false ) );
-            verts.AddRange( BuildFaceVerts( new Vector3( xi, yi, zi ), Vector3.up, Vector3.right ) );
+            if( blockIdMap.CellIsEmpty( xi, yi, zi - 1 ) ) {
+              tris.AddRange( BuildFaceTris( verts.Count, false ) );
+              verts.AddRange( BuildFaceVerts( new Vector3( xi, yi, zi ), Vector3.up, Vector3.right ) );
+            }
 
             // Generate Front Faces
-            tris.AddRange( BuildFaceTris( verts.Count, true ) );
-            verts.AddRange( BuildFaceVerts( new Vector3( xi, yi, zi + 1 ), Vector3.up, Vector3.right ) );
+            if( blockIdMap.CellIsEmpty( xi, yi, zi + 1 ) ) {
+              tris.AddRange( BuildFaceTris( verts.Count, true ) );
+              verts.AddRange( BuildFaceVerts( new Vector3( xi, yi, zi + 1 ), Vector3.up, Vector3.right ) );
+            }
 
             // Generate Right Faces
-            tris.AddRange( BuildFaceTris( verts.Count, false ) );
-            verts.AddRange( BuildFaceVerts( new Vector3( xi + 1, yi, zi ), Vector3.up, Vector3.forward ) );
+            if( blockIdMap.CellIsEmpty( xi + 1, yi, zi ) ) {
+              tris.AddRange( BuildFaceTris( verts.Count, false ) );
+              verts.AddRange( BuildFaceVerts( new Vector3( xi + 1, yi, zi ), Vector3.up, Vector3.forward ) );
+            }
 
             // Generate Left Faces
-            tris.AddRange( BuildFaceTris( verts.Count, true ) );
-            verts.AddRange( BuildFaceVerts( new Vector3( xi, yi, zi ), Vector3.up, Vector3.forward ) );
+            if( blockIdMap.CellIsEmpty( xi - 1, yi, zi ) ) {
+              tris.AddRange( BuildFaceTris( verts.Count, true ) );
+              verts.AddRange( BuildFaceVerts( new Vector3( xi, yi, zi ), Vector3.up, Vector3.forward ) );
+            }
 
             // Generate Top Faces
-            tris.AddRange( BuildFaceTris( verts.Count, false ) );
-            verts.AddRange( BuildFaceVerts( new Vector3( xi, yi + 1, zi ), Vector3.forward, Vector3.right ) );
+            if( blockIdMap.CellIsEmpty( xi, yi + 1, zi ) ) {
+              tris.AddRange( BuildFaceTris( verts.Count, false ) );
+              verts.AddRange( BuildFaceVerts( new Vector3( xi, yi + 1, zi ), Vector3.forward, Vector3.right ) );
+            }
 
             // Generate Bottom Faces
-            tris.AddRange( BuildFaceTris( verts.Count, true ) );
-            verts.AddRange( BuildFaceVerts( new Vector3( xi, yi, zi ), Vector3.forward, Vector3.right ) );
+            if( blockIdMap.CellIsEmpty( xi, yi - 1, zi ) ) {
+              tris.AddRange( BuildFaceTris( verts.Count, true ) );
+              verts.AddRange( BuildFaceVerts( new Vector3( xi, yi, zi ), Vector3.forward, Vector3.right ) );
+            }
           }
         }
       }
