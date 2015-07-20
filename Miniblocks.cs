@@ -52,6 +52,10 @@ namespace ginsederp.miniblocks
             tris.AddRange( BuildFaceTris( verts.Count, true ) );
             verts.AddRange( BuildFaceVerts( new Vector3( xi, yi, zi ), Vector3.up, Vector3.forward ) );
 
+            // Generate Top Faces
+            tris.AddRange( BuildFaceTris( verts.Count, false ) );
+            verts.AddRange( BuildFaceVerts( new Vector3( xi, yi + 1, zi ), Vector3.forward, Vector3.right ) );
+
             // Generate Bottom Faces
             tris.AddRange( BuildFaceTris( verts.Count, true ) );
             verts.AddRange( BuildFaceVerts( new Vector3( xi, yi, zi ), Vector3.forward, Vector3.right ) );
