@@ -13,11 +13,43 @@ namespace ginsederp.miniblocks
     }
 
     [SerializeField] protected eToolType[] toolType;
+    [SerializeField] protected int[] toolBlockId;
     [SerializeField] protected Int3[] toolStart;
     [SerializeField] protected Int3[] toolSize;
 
+    public Grid3<int> CreateGrid()
+    {
+      AssertEqualToolArrayLengths();
+
+      Grid3<int> grid = new Grid3<int>();
+
+      for( int i = 0; i < toolType.Length; i++ ) {
+        switch( toolType[i] ) {
+          case eToolType.add:
+            grid.Add( toolBlockId[i], toolStart[i], toolSize[i] );
+            break;
+          case eToolType.remove:
+            grid.Remove( toolStart[i], toolSize[i] );
+            break;
+        }
+      }
+
+      return grid;
+    }
+
+    protected bool AssertEqualToolArrayLengths()
+    {
+      if( toolBlockId.Length != toolType.Length || toolStart.Length != toolType.Length || toolSize.Length != toolType.Length ) {
+        throw new Exception("Array length of tool array variables are not equal.");
+        return false;
+      }
+
+      return true;
+    }
+
     void Start()
     {
+      AssertEqualToolArrayLengths();
       return;
     }
   }

@@ -141,7 +141,9 @@ namespace ginsederp.miniblocks
     {
       InitComponents();
 
-      blockIdMap.Add( 1, new Int3( 0, 0, 0 ), new Int3( 10, 10, 10 ) );
+      MiniblockRectangleTool miniblockRectangleTool = gameObject.GetComponent<MiniblockRectangleTool>();
+      blockIdMap = ( miniblockRectangleTool != null ) ? miniblockRectangleTool.CreateGrid() : blockIdMap;
+
       GenerateMesh();
 
       return;
