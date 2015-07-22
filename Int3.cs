@@ -1,6 +1,7 @@
 ﻿
 namespace ginsederp.miniblocks
 {
+  [System.Serializable]
   public struct Int3
   {
     public int x;
