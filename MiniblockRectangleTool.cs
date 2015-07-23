@@ -28,16 +28,16 @@ namespace ginsederp.miniblocks
       for( int i = 0; i < toolType.Length; i++ ) {
         switch( toolType[i] ) {
           case eToolType.add:
-            grid.Add( toolBlockId[i], toolStart[i], toolSize[i] );
+            grid.AddCells( toolBlockId[i], toolStart[i], toolSize[i] );
             break;
           case eToolType.remove:
-            grid.Remove( toolStart[i], toolSize[i] );
+            grid.RemoveCells( toolStart[i], toolSize[i] );
             break;
           case eToolType.writeover:
-            grid.Writeover( toolBlockId[i], toolStart[i], toolSize[i] );
+            grid.WriteoverCells( toolBlockId[i], toolStart[i], toolSize[i] );
             break;
           case eToolType.intersect:
-            grid.Intersect( toolBlockId[i], toolStart[i], toolSize[i] );
+            grid.IntersectCells( toolBlockId[i], toolStart[i], toolSize[i] );
             break;
         }
       }

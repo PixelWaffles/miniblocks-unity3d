@@ -69,25 +69,25 @@ namespace ginsederp.miniblocks
       return;
     }
 
-    public void Add( T _value, Int3 _begin, Int3 _size )
+    public void AddCells( T _value, Int3 _begin, Int3 _size )
     {
       WriteCells( _value, _begin, _size, false, true );
       return;
     }
 
-    public void Remove( Int3 _begin, Int3 _size )
+    public void RemoveCells( Int3 _begin, Int3 _size )
     {
       WriteCells( default(T), _begin, _size, true, false );
       return;
     }
 
-    public void Writeover( T _value, Int3 _begin, Int3 _size )
+    public void WriteoverCells( T _value, Int3 _begin, Int3 _size )
     {
       WriteCells( _value, _begin, _size, true, true );
       return;
     }
 
-    public void Intersect( T _value, Int3 _begin, Int3 _size )
+    public void IntersectCells( T _value, Int3 _begin, Int3 _size )
     {
       WriteCells( _value, _begin, _size, true, false );
       return;
