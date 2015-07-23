@@ -37,14 +37,13 @@ namespace ginsederp.miniblocks
       return grid;
     }
 
-    protected bool AssertEqualToolArrayLengths()
+    protected void AssertEqualToolArrayLengths()
     {
       if( toolBlockId.Length != toolType.Length || toolStart.Length != toolType.Length || toolSize.Length != toolType.Length ) {
         throw new Exception("Array length of tool array variables are not equal.");
-        return false;
       }
 
-      return true;
+      return;
     }
 
     void Start()
