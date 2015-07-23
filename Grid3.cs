@@ -38,14 +38,14 @@ namespace ginsederp.miniblocks
       return _cellPosX < 0 || _cellPosY < 0 || _cellPosZ < 0 || _cellPosX >= grid.GetLength( 0 ) || _cellPosY >= grid.GetLength( 1 ) || _cellPosZ >= grid.GetLength( 2 );
     }
 
-    public void Add( T _value, Int3 _begin, Int3 _size, bool _writeOverFilledCells = false )
+    public void WriteCells( T _value, Int3 _begin, Int3 _size, bool _writeOverFilledCells, bool _writeOverEmptyCells )
     {
       AllocateGrid( _begin, _size );
 
       for( int xi = _begin.x; xi < _begin.x + _size.x; xi++ ) {
         for( int yi = _begin.y; yi < _begin.y + _size.y; yi++ ) {
           for( int zi = _begin.z; zi < _begin.z + _size.z; zi++ ) {
-            if( _writeOverFilledCells || CellIsEmpty( xi, yi, zi ) ) {
+            if( _writeOverFilledCells && CellIsFilled( xi, yi, zi ) || _writeOverEmptyCells && CellIsEmpty( xi, yi, zi ) ) {
               grid[ xi, yi, zi ] = _value;
             }
           }
@@ -69,9 +69,27 @@ namespace ginsederp.miniblocks
       return;
     }
 
+    public void Add( T _value, Int3 _begin, Int3 _size )
+    {
+      WriteCells( _value, _begin, _size, false, true );
+      return;
+    }
+
     public void Remove( Int3 _begin, Int3 _size )
     {
-      Add( default(T), _begin, _size, true );
+      WriteCells( default(T), _begin, _size, true, false );
+      return;
+    }
+
+    public void Writeover( T _value, Int3 _begin, Int3 _size )
+    {
+      WriteCells( _value, _begin, _size, true, true );
+      return;
+    }
+
+    public void Intersect( T _value, Int3 _begin, Int3 _size )
+    {
+      WriteCells( _value, _begin, _size, true, false );
       return;
     }
 

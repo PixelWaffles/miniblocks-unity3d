@@ -10,6 +10,8 @@ namespace ginsederp.miniblocks
     protected enum eToolType {
       add,
       remove,
+      writeover,
+      intersect,
     }
 
     [SerializeField] protected eToolType[] toolType;
@@ -30,6 +32,12 @@ namespace ginsederp.miniblocks
             break;
           case eToolType.remove:
             grid.Remove( toolStart[i], toolSize[i] );
+            break;
+          case eToolType.writeover:
+            grid.Writeover( toolBlockId[i], toolStart[i], toolSize[i] );
+            break;
+          case eToolType.intersect:
+            grid.Intersect( toolBlockId[i], toolStart[i], toolSize[i] );
             break;
         }
       }
