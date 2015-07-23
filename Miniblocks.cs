@@ -28,6 +28,10 @@ namespace ginsederp.miniblocks
 
       List<Vector3> verts = new List<Vector3>();
       List<int> tris = new List<int>();
+      List<Color32> colors = new List<Color32>();
+
+      MiniblockVertexColorTool miniblockVertexColorTool = gameObject.GetComponent<MiniblockVertexColorTool>();
+      bool hasVertexColorTool = ( miniblockVertexColorTool != null );
 
       for( int xi = 0; xi < blockIdMap.grid.GetLength( 0 ); xi++ ) {
         for( int yi = 0; yi < blockIdMap.grid.GetLength( 1 ); yi++ ) {
@@ -36,40 +40,53 @@ namespace ginsederp.miniblocks
               continue;
             }
 
+            int facesDrawn = 0;
+
             // Generate Back Faces
             if( blockIdMap.CellIsEmpty( xi, yi, zi - 1 ) ) {
               tris.AddRange( BuildFaceTris( verts.Count, false ) );
               verts.AddRange( BuildFaceVerts( new Vector3( xi, yi, zi ), Vector3.up, Vector3.right ) );
+              facesDrawn++;
             }
 
             // Generate Front Faces
             if( blockIdMap.CellIsEmpty( xi, yi, zi + 1 ) ) {
               tris.AddRange( BuildFaceTris( verts.Count, true ) );
               verts.AddRange( BuildFaceVerts( new Vector3( xi, yi, zi + 1 ), Vector3.up, Vector3.right ) );
+              facesDrawn++;
             }
 
             // Generate Right Faces
             if( blockIdMap.CellIsEmpty( xi + 1, yi, zi ) ) {
               tris.AddRange( BuildFaceTris( verts.Count, false ) );
               verts.AddRange( BuildFaceVerts( new Vector3( xi + 1, yi, zi ), Vector3.up, Vector3.forward ) );
+              facesDrawn++;
             }
 
             // Generate Left Faces
             if( blockIdMap.CellIsEmpty( xi - 1, yi, zi ) ) {
               tris.AddRange( BuildFaceTris( verts.Count, true ) );
               verts.AddRange( BuildFaceVerts( new Vector3( xi, yi, zi ), Vector3.up, Vector3.forward ) );
+              facesDrawn++;
             }
 
             // Generate Top Faces
             if( blockIdMap.CellIsEmpty( xi, yi + 1, zi ) ) {
               tris.AddRange( BuildFaceTris( verts.Count, false ) );
               verts.AddRange( BuildFaceVerts( new Vector3( xi, yi + 1, zi ), Vector3.forward, Vector3.right ) );
+              facesDrawn++;
             }
 
             // Generate Bottom Faces
             if( blockIdMap.CellIsEmpty( xi, yi - 1, zi ) ) {
               tris.AddRange( BuildFaceTris( verts.Count, true ) );
               verts.AddRange( BuildFaceVerts( new Vector3( xi, yi, zi ), Vector3.forward, Vector3.right ) );
+              facesDrawn++;
+            }
+
+            // Color Face Vertices
+            if( hasVertexColorTool && facesDrawn > 0 ) {
+              colors.AddRange( miniblockVertexColorTool.BuildFaceColors( blockIdMap.grid[ xi, yi, zi ], facesDrawn ) );
             }
           }
         }
@@ -77,6 +94,9 @@ namespace ginsederp.miniblocks
 
       mesh.vertices = verts.ToArray();
       mesh.triangles = tris.ToArray();
+      if( hasVertexColorTool ) {
+        mesh.colors32 = colors.ToArray();
+      }
 
       mesh.RecalculateBounds();
       mesh.RecalculateNormals();
