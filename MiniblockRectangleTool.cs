@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 namespace ginsederp.miniblocks
 {
+  [RequireComponent( typeof(Miniblocks) )]
   public class MiniblockRectangleTool : MonoBehaviour
   {
     protected enum eToolType {

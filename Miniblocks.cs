@@ -5,23 +5,11 @@ using System.Collections.Generic;
 
 namespace ginsederp.miniblocks
 {
+  [RequireComponent( typeof(MeshFilter) )]
   public class Miniblocks : MonoBehaviour
   {
     public Vector3 voxelScale = Vector3.one;
     public Grid3<int> blockIdMap = new Grid3<int>();
-    [NonSerialized] public MeshRenderer meshRenderer;
-    [NonSerialized] public MeshFilter meshFilter;
-
-    protected void InitComponents()
-    {
-      meshRenderer = gameObject.GetComponent<MeshRenderer>();
-      meshFilter = gameObject.GetComponent<MeshFilter>();
-
-      meshRenderer = ( meshRenderer != null ) ? meshRenderer : gameObject.AddComponent<MeshRenderer>();
-      meshFilter = ( meshFilter != null ) ? meshFilter : gameObject.AddComponent<MeshFilter>();
-
-      return;
-    }
 
     protected void GenerateMesh()
     {
@@ -102,7 +90,7 @@ namespace ginsederp.miniblocks
       mesh.RecalculateBounds();
       mesh.RecalculateNormals();
 
-      meshFilter.mesh = mesh;
+      gameObject.GetComponent<MeshFilter>().mesh = mesh;
 
       return;
     }
@@ -164,8 +152,6 @@ namespace ginsederp.miniblocks
 
     void Start()
     {
-      InitComponents();
-
       MiniblockRectangleTool miniblockRectangleTool = gameObject.GetComponent<MiniblockRectangleTool>();
       blockIdMap = ( miniblockRectangleTool != null ) ? miniblockRectangleTool.CreateGrid() : blockIdMap;
 

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 namespace ginsederp.miniblocks
 {
+  [RequireComponent( typeof(Miniblocks) )]
   public class MiniblockVertexColorTool : MonoBehaviour
   {
     [SerializeField] protected Color32[] idColors;
