@@ -7,6 +7,7 @@ namespace ginsederp.miniblocks
 {
   public class Miniblocks : MonoBehaviour
   {
+    public Vector3 voxelScale = Vector3.one;
     public Grid3<int> blockIdMap = new Grid3<int>();
     [NonSerialized] public MeshRenderer meshRenderer;
     [NonSerialized] public MeshFilter meshFilter;
@@ -119,6 +120,10 @@ namespace ginsederp.miniblocks
       verts[1] = _origin + _up;
       verts[2] = _origin + _up + _right;
       verts[3] = _origin + _right;
+
+      for( int i = 0; i < verts.Length; i++ ) {
+        verts[i] = Vector3.Scale( verts[i], voxelScale );
+      }
 
       return verts;
     }
