@@ -7,3 +7,6 @@
 !*.md
 !*.txt
 !*.cs
+
+# Even if they are in subdirectories
+!*/
