@@ -54,7 +54,7 @@ namespace ginsederp.miniblocks
     protected void AssertEqualToolArrayLengths()
     {
       if( !ToolArrayLengthsIsEqual() ) {
-        throw new Exception("Array length of tool array variables are not equal.");
+        throw new Exception("Array lengths of tool array variables are not equal.");
       }
 
       return;

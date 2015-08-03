@@ -20,6 +20,10 @@ namespace ginsederp.miniblocks
     {
       so.Update();
 
+      if( !blockRectTool.ToolArrayLengthsIsEqual() ) {
+        EditorGUILayout.HelpBox("Array lengths of tool array variables are not equal.", MessageType.Error);
+      }
+
       EditorGUILayout.PropertyField( so.FindProperty("toolType"), true );
       EditorGUILayout.PropertyField( so.FindProperty("toolBlockId"), true );
       EditorGUILayout.PropertyField( so.FindProperty("toolStart"), true );
