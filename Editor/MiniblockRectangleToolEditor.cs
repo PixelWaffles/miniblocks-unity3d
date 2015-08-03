@@ -34,9 +34,12 @@ namespace ginsederp.miniblocks
           Miniblocks miniblocks = blockRectTool.gameObject.GetComponent<Miniblocks>();
           MeshFilter meshFilter = blockRectTool.gameObject.GetComponent<MeshFilter>();
 
-          Undo.RecordObject( meshFilter, "MeshGenerate" );
+          Object[] objectsToUndo = { miniblocks, meshFilter };
+
+          Undo.RecordObjects( objectsToUndo, "MeshGenerate" );
 
           miniblocks.GenerateMiniblocks();
+          EditorUtility.SetDirty( miniblocks );
           EditorUtility.SetDirty( meshFilter );
         }
       }
