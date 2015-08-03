@@ -26,6 +26,13 @@ namespace ginsederp.miniblocks
       EditorGUILayout.PropertyField( so.FindProperty("toolSize"), true );
 
       so.ApplyModifiedProperties();
+
+      if( GUI.changed ) {
+        if( blockRectTool.ToolArrayLengthsIsEqual() ) {
+          blockRectTool.gameObject.GetComponent<Miniblocks>().GenerateMiniblocks();
+        }
+      }
+
       return;
     }
 

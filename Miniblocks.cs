@@ -11,7 +11,16 @@ namespace ginsederp.miniblocks
     public Vector3 voxelScale = Vector3.one;
     public Grid3<int> blockIdMap = new Grid3<int>();
 
-    protected void GenerateMesh()
+    public void GenerateMiniblocks()
+    {
+      MiniblockRectangleTool miniblockRectangleTool = gameObject.GetComponent<MiniblockRectangleTool>();
+      blockIdMap = ( miniblockRectangleTool != null ) ? miniblockRectangleTool.CreateGrid() : blockIdMap;
+
+      GenerateMesh();
+      return;
+    }
+
+    public void GenerateMesh()
     {
       Mesh mesh = new Mesh();
 
@@ -152,11 +161,7 @@ namespace ginsederp.miniblocks
 
     void Start()
     {
-      MiniblockRectangleTool miniblockRectangleTool = gameObject.GetComponent<MiniblockRectangleTool>();
-      blockIdMap = ( miniblockRectangleTool != null ) ? miniblockRectangleTool.CreateGrid() : blockIdMap;
-
-      GenerateMesh();
-
+      GenerateMiniblocks();
       return;
     }
   }
