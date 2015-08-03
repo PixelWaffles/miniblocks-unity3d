@@ -29,11 +29,15 @@ namespace ginsederp.miniblocks
       EditorGUILayout.PropertyField( so.FindProperty("toolStart"), true );
       EditorGUILayout.PropertyField( so.FindProperty("toolSize"), true );
 
-      so.ApplyModifiedProperties();
-
-      if( GUI.changed ) {
+      if( so.ApplyModifiedProperties() ) {
         if( blockRectTool.ToolArrayLengthsIsEqual() ) {
-          blockRectTool.gameObject.GetComponent<Miniblocks>().GenerateMiniblocks();
+          Miniblocks miniblocks = blockRectTool.gameObject.GetComponent<Miniblocks>();
+          MeshFilter meshFilter = blockRectTool.gameObject.GetComponent<MeshFilter>();
+
+          Undo.RecordObject( meshFilter, "MeshGenerate" );
+
+          miniblocks.GenerateMiniblocks();
+          EditorUtility.SetDirty( meshFilter );
         }
       }
 
