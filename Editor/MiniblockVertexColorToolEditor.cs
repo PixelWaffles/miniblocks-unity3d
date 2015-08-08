@@ -23,16 +23,7 @@ namespace ginsederp.miniblocks
       EditorGUILayout.PropertyField( so.FindProperty("idColors"), true );
 
       if( so.ApplyModifiedProperties() ) {
-        Miniblocks miniblocks = colorTool.gameObject.GetComponent<Miniblocks>();
-        MeshFilter meshFilter = colorTool.gameObject.GetComponent<MeshFilter>();
-
-        Object[] objectsToUndo = { miniblocks, meshFilter };
-
-        Undo.RecordObjects( objectsToUndo, "MeshGenerate" );
-
-        miniblocks.GenerateMiniblocks();
-        EditorUtility.SetDirty( miniblocks );
-        EditorUtility.SetDirty( meshFilter );
+        EditorHelper.GenerateMiniblocks( colorTool.gameObject );
       }
 
       return;

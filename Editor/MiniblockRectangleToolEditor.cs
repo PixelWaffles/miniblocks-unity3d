@@ -31,16 +31,7 @@ namespace ginsederp.miniblocks
 
       if( so.ApplyModifiedProperties() ) {
         if( blockRectTool.ToolArrayLengthsIsEqual() ) {
-          Miniblocks miniblocks = blockRectTool.gameObject.GetComponent<Miniblocks>();
-          MeshFilter meshFilter = blockRectTool.gameObject.GetComponent<MeshFilter>();
-
-          Object[] objectsToUndo = { miniblocks, meshFilter };
-
-          Undo.RecordObjects( objectsToUndo, "MeshGenerate" );
-
-          miniblocks.GenerateMiniblocks();
-          EditorUtility.SetDirty( miniblocks );
-          EditorUtility.SetDirty( meshFilter );
+          EditorHelper.GenerateMiniblocks( blockRectTool.gameObject );
         }
       }
 
