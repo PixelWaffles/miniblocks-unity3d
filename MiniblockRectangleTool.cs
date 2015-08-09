@@ -8,56 +8,46 @@ namespace ginsederp.miniblocks
   [RequireComponent( typeof(Miniblocks) )]
   public class MiniblockRectangleTool : MonoBehaviour
   {
-    protected enum eToolType {
-      add,
-      remove,
-      writeover,
-      intersect,
+    [System.Serializable]
+    protected struct RectTool
+    {
+      public enum eToolType {
+        add,
+        remove,
+        writeover,
+        intersect,
+      }
+
+      public eToolType toolType;
+      public int toolBlockId;
+      public Int3 toolStart;
+      public Int3 toolSize;
     }
 
-    [SerializeField] protected eToolType[] toolType;
-    [SerializeField] protected int[] toolBlockId;
-    [SerializeField] protected Int3[] toolStart;
-    [SerializeField] protected Int3[] toolSize;
+    [SerializeField] protected RectTool[] rectTools;
 
     public Grid3<int> CreateGrid()
     {
-      AssertEqualToolArrayLengths();
-
       Grid3<int> grid = new Grid3<int>();
 
-      for( int i = 0; i < toolType.Length; i++ ) {
-        switch( toolType[i] ) {
-          case eToolType.add:
-            grid.AddCells( toolBlockId[i], toolStart[i], toolSize[i] );
+      foreach( RectTool rectTool in rectTools ) {
+        switch( rectTool.toolType ) {
+          case RectTool.eToolType.add:
+            grid.AddCells( rectTool.toolBlockId, rectTool.toolStart, rectTool.toolSize );
             break;
-          case eToolType.remove:
-            grid.RemoveCells( toolStart[i], toolSize[i] );
+          case RectTool.eToolType.remove:
+            grid.RemoveCells( rectTool.toolStart, rectTool.toolSize );
             break;
-          case eToolType.writeover:
-            grid.WriteoverCells( toolBlockId[i], toolStart[i], toolSize[i] );
+          case RectTool.eToolType.writeover:
+            grid.WriteoverCells( rectTool.toolBlockId, rectTool.toolStart, rectTool.toolSize );
             break;
-          case eToolType.intersect:
-            grid.IntersectCells( toolBlockId[i], toolStart[i], toolSize[i] );
+          case RectTool.eToolType.intersect:
+            grid.IntersectCells( rectTool.toolBlockId, rectTool.toolStart, rectTool.toolSize );
             break;
         }
       }
 
       return grid;
-    }
-
-    public bool ToolArrayLengthsIsEqual()
-    {
-      return toolBlockId.Length == toolType.Length && toolStart.Length == toolType.Length && toolSize.Length == toolType.Length;
-    }
-
-    protected void AssertEqualToolArrayLengths()
-    {
-      if( !ToolArrayLengthsIsEqual() ) {
-        throw new Exception("Array lengths of tool array variables are not equal.");
-      }
-
-      return;
     }
 
     void Start()
