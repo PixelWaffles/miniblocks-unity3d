@@ -42,11 +42,24 @@ namespace ginsederp.miniblocks
       return;
     }
 
+    protected void ReorderableReorder( ReorderableList _list )
+    {
+      UpdateMiniblocks();
+      return;
+    }
+
+    protected void UpdateMiniblocks()
+    {
+      EditorHelper.GenerateMiniblocks( colorTool.gameObject );
+      return;
+    }
+
     protected void SetupReorderableList()
     {
       reorderableList = new ReorderableList( so, so.FindProperty("idColors"), true, true, true, true );
       reorderableList.drawElementCallback = ReorderableDrawElement;
       reorderableList.drawHeaderCallback = ReorderableDrawHeader;
+      reorderableList.onReorderCallback = ReorderableReorder;
       return;
     }
 
@@ -66,7 +79,7 @@ namespace ginsederp.miniblocks
       reorderableList.DoLayoutList();
 
       if( so.ApplyModifiedProperties() ) {
-        EditorHelper.GenerateMiniblocks( colorTool.gameObject );
+        UpdateMiniblocks();
       }
 
       return;
