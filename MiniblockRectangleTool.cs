@@ -18,6 +18,7 @@ namespace ginsederp.miniblocks
         intersect,
       }
 
+      public string name;
       public eToolType toolType;
       public int toolBlockId;
       public Int3 toolStart;
