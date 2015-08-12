@@ -1,2 +1,5 @@
 #Miniblocks-Unity3d
-Unity 3d block voxel script.
+Miniblocks is a Unity 3d block voxel script.
+
+#License
+The MIT License, see LICENSE file.
